@@ -1,38 +1,73 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.cropper {
+    position: relative;
+    width: 80vw;
+    height: 90vh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 10px 9px 0px rgba(0, 0, 0, 0.09);
+
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+input[type='radio'] {
+    accent-color: #189580;
 }
 
-.App-link {
-  color: #61dafb;
+.btn {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #ffffff;
+    background: #189580;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.2rem;
+    border: 2px solid #189580;
+    cursor: pointer;
+    margin: 1rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.btn-outline {
+    background: #ffffff;
+    color: #189580;
+    border: 2px solid #189580;
+}
+
+.action-btns {
+    padding-bottom: 1rem;
+}
+
+.btn-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cropped-img {
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
+}
+
+.aspect-ratios {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    font-weight: 500;
 }
