@@ -44,7 +44,7 @@ const App = () => {
         imgCroppedArea.height
       );
 
-      const dataURL = canvasEle.toDataURL("image/jpeg");
+      const dataURL = canvasEle.toDataURL("image/png"); // Change to PNG format
 
       setImgAfterCrop(dataURL);
       setCropDetails(imgCroppedArea);
@@ -61,7 +61,7 @@ const App = () => {
         const response = await fetch(dataURL);
         const blob = await response.blob();
 
-        // Here we resize the image before removing the background
+        // Resize image before removing the background
         const resizedBlob = await resizeImageBlob(blob, 800, 800); // Example resize to 800x800 max
 
         const resultBlob = await removeBackground(resizedBlob);
@@ -72,12 +72,20 @@ const App = () => {
         // Create a file object from the result blob
         const backgroundRemovedFile = new File(
           [resultBlob],
-          "background-removed-image.jpeg",
+          "background-removed-image.png", // Ensure PNG format
           {
             type: "image/png",
           }
         );
         setBackgroundRemovedFile(backgroundRemovedFile);
+
+        // Automatically trigger the download
+        const downloadLink = document.createElement("a");
+        downloadLink.href = resultURL;
+        downloadLink.download = "background-removed-image.png";
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
 
         toast.success("Background removed successfully!", {
           position: "top-right",
@@ -109,6 +117,7 @@ const App = () => {
       setCurrentPage("img-cropped");
     };
   };
+
 
   const onCropCancel = () => {
     setCurrentPage("choose-img");

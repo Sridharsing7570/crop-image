@@ -1,20 +1,45 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Cropper from "react-easy-crop";
 
 const ImageCropper = ({ image, onCropDone, onCropCancel }) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedArea, setCroppedArea] = useState(null);
-  const [aspectRatio, setAspectRatio] = useState(4 / 3);
+  const [aspectRatio, setAspectRatio] = useState(7 / 1);
 
-  const onCropComplete = (croppedAreaPercentage, croppedAreaPixels) => {
-    setCroppedArea(croppedAreaPixels);
+  const getImageAspectRatio = (imageUrl) => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.src = imageUrl;
+      img.onload = () => {
+        const width = img.width;
+        const height = img.height;
+        const aspectRatio = width / height;
+        resolve(aspectRatio);
+      };
+      img.onerror = reject;
+    });
   };
 
-  const onAspectRatioChange = (event) => {
-    setAspectRatio(event.target.value);
-  };
+  useEffect(() => {
+    // Usage example:
+    getImageAspectRatio(image)
+      .then((aspectRatio) => {
+        console.log("Aspect Ratio:", aspectRatio);
+        setAspectRatio(aspectRatio);
+      })
+      .catch((error) => {
+        console.error("Error loading image:", error);
+      });
+  }, [image]);
 
+    const onCropComplete = (croppedAreaPercentage, croppedAreaPixels) => {
+      setCroppedArea(croppedAreaPixels);
+    };
+
+    const onAspectRatioChange = (event) => {
+      setAspectRatio(parseFloat(event.target.value));
+    };
   return (
     <div className="cropper">
       <Cropper
