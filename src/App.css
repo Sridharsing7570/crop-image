@@ -5,24 +5,31 @@
     margin: 0;
 }
 
-.container {
-    width: 100vw;
+.red {
+    background-color: #212529;
     height: 100vh;
+}
+
+.container {
+    width: 100%;
+    height: 88vh;
     display: flex;
     align-items: center;
     justify-content: center;
+
 }
 
 .cropper {
     position: relative;
     width: 80vw;
-    height: 90vh;
+    height: 75vh;
     display: flex;
     align-items: flex-end;
     justify-content: center;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0px 10px 9px 0px rgba(0, 0, 0, 0.09);
+    margin-top: 2rem;
 
 }
 
@@ -30,16 +37,29 @@ input[type='radio'] {
     accent-color: #189580;
 }
 
-.btn {
+.btn-custom {
     font-size: 1rem;
     font-weight: 500;
     color: #ffffff;
-    background: #189580;
+    background: rgb(73, 73, 224);
     padding: 0.5rem 1.5rem;
-    border-radius: 0.2rem;
-    border: 2px solid #189580;
+    border-radius: 5px;
+    border: none;
     cursor: pointer;
     margin: 1rem;
+    display: flex;
+}
+
+.custom-file-container {
+    height: 30rem;
+    width: 80rem;
+    background-color: white;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("../public/assets-cached.jpg");
+    background-size: contain;
 }
 
 .btn-outline {
@@ -55,7 +75,7 @@ input[type='radio'] {
 .btn-container {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
 }
 
 .cropped-img {
@@ -70,4 +90,61 @@ input[type='radio'] {
     gap: 0.5rem;
     font-size: 1rem;
     font-weight: 500;
+    color: white;
+    margin-bottom: 1rem;
+
 }
+
+.custum-inside-container {
+    height: 20rem;
+    width: 60rem;
+    background-color: rgb(73, 72, 72);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 16px;
+}
+
+.write-text {
+    height: 15rem;
+    width: 99%;
+    background-color: white;
+    color: white;
+    border-radius: 10px;
+    background: transparent;
+}
+
+.write-text h1 {
+    font-size: 2.5rem;
+    font-weight: 400;
+    padding: 1rem;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.write-text p {
+    font-size: 1.2rem;
+    font-family: 'Times New Roman', Times, serif;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    margin-top: 1rem;
+}
+
+.custom-react-icon {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+}
+
+.btn-1 {
+    background-color: #240750;
+    color: white;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    height: 3rem;
+    width: 10rem;
+}
+.custom-curser{
+    cursor: pointer;
+}
+
