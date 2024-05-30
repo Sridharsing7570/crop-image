@@ -6,7 +6,7 @@ const Navbar = () => {
     <div>
       <nav
         class="navbar navbar-expand-lg "
-        style={{ backgroundColor: "#240750",height:"5rem" }}
+        style={{ backgroundColor: "#240750", height: "5rem" }}
       >
         <div class="container-fluid ">
           <button
@@ -46,7 +46,7 @@ const Navbar = () => {
                   aria-expanded="false"
                   style={{ color: "white" }}
                 >
-                 Design
+                  Design
                 </a>
                 <ul
                   class="dropdown-menu"
@@ -85,17 +85,6 @@ const Navbar = () => {
                 </ul>
               </li>
             </ul>
-            <form class="d-flex" role="search">
-              <input
-                class="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button class="btn btn-outline-success" type="submit">
-                Search
-              </button>
-            </form>
           </div>
         </div>
       </nav>

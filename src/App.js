@@ -6,6 +6,7 @@ import { removeBackground } from "@imgly/background-removal";
 import toast, { Toaster } from "react-hot-toast";
 import Navbar from "./Components/Navbar";
 
+
 const App = () => {
   const [image, setImage] = useState("");
   const [currentPage, setCurrentPage] = useState("choose-img");
@@ -161,57 +162,59 @@ const App = () => {
   };
 
   return (
-    <div className="red">
-      <Navbar />
-      <div className="container">
-        {currentPage === "choose-img" ? (
-          <Fileinput onImageSelected={onImageSelected} />
-        ) : currentPage === "crop-img" ? (
-          <ImageCropper
-            image={image}
-            onCropDone={onCropDone}
-            onCropCancel={onCropCancel}
-          />
-        ) : (
-          <div>
-            {imgAfterBackgroundRemoval ? (
-              <div>
-                <img
-                  src={imgAfterBackgroundRemoval}
-                  className="cropped-img"
-                  alt="Cropped Image with Background Removed"
-                />
-              </div>
-            ) : (
-              <div>Loading...</div>
-            )}
+    
+      <div className="red">
+        <Navbar />
+        <div className="container">
+          {currentPage === "choose-img" ? (
+            <Fileinput onImageSelected={onImageSelected} />
+          ) : currentPage === "crop-img" ? (
+            <ImageCropper
+              image={image}
+              onCropDone={onCropDone}
+              onCropCancel={onCropCancel}
+            />
+          ) : (
+            <div>
+              {imgAfterBackgroundRemoval ? (
+                <div>
+                  <img
+                    src={imgAfterBackgroundRemoval}
+                    className="cropped-img"
+                    alt="Cropped Image with Background Removed"
+                  />
+                </div>
+              ) : (
+                <div>Loading...</div>
+              )}
 
-            <button
-              onClick={() => {
-                setCurrentPage("crop-img");
-              }}
-              className="btn"
-            >
-              Crop
-            </button>
-            <button
-              onClick={() => {
-                setCurrentPage("choose-img");
-                setImage("");
-                setImageDetails(null);
-                setImgAfterCrop("");
-                setImgAfterBackgroundRemoval("");
-                setBackgroundRemovedFile(null); // Reset the file object
-              }}
-              className="btn"
-            >
-              New Image
-            </button>
-          </div>
-        )}
-        <Toaster containerStyle={{ marginTop: "5rem" }} />
+              <button
+                onClick={() => {
+                  setCurrentPage("crop-img");
+                }}
+                className="btn"
+              >
+                Crop
+              </button>
+              <button
+                onClick={() => {
+                  setCurrentPage("choose-img");
+                  setImage("");
+                  setImageDetails(null);
+                  setImgAfterCrop("");
+                  setImgAfterBackgroundRemoval("");
+                  setBackgroundRemovedFile(null); // Reset the file object
+                }}
+                className="btn"
+              >
+                New Image
+              </button>
+            </div>
+          )}
+          <Toaster containerStyle={{ marginTop: "5rem" }} />
+        </div>
       </div>
-    </div>
+    
   );
 };
 
