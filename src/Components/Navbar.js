@@ -1,5 +1,6 @@
 import React from "react";
 import "./Navbar.css";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -53,34 +54,49 @@ const Navbar = () => {
                   style={{ backgroundColor: "#240750" }}
                 >
                   <li>
-                    <a
+                    <Link
                       class="dropdown-item"
-                      href="#"
+                     to={'/crop5to3'}
                       style={{ color: "white" }}
                     >
-                      Action
-                    </a>
+                      Crop for Course Contents
+                    </Link>
                   </li>
                   <li>
-                    <a
+                    <Link
                       class="dropdown-item"
-                      href="#"
+                     to={'/crop1to1'}
                       style={{ color: "white" }}
                     >
-                      Another action
-                    </a>
+                      Crop for Logo
+                    </Link>
                   </li>
                   <li>
-                    <hr class="dropdown-divider" />
-                  </li>
-                  <li>
-                    <a
+                    <Link
                       class="dropdown-item"
-                      href="#"
+                     to={'/crop_background1to1'}
                       style={{ color: "white" }}
                     >
-                      Something else here
-                    </a>
+                      Crop for Profile Picture
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      class="dropdown-item"
+                     to={'/crop_background3to1'}
+                      style={{ color: "white" }}
+                    >
+                      Crop for Signature
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      class="dropdown-item"
+                     to={'/crop_background'}
+                      style={{ color: "white" }}
+                    >
+                      Crop & Remove Any
+                    </Link>
                   </li>
                 </ul>
               </li>

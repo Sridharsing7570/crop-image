@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from "react";
 import Cropper from "react-easy-crop";
+import { useLocation } from "react-router-dom";
 
 const ImageCropper = ({ image, onCropDone, onCropCancel }) => {
+  const location = useLocation();
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedArea, setCroppedArea] = useState(null);
   const [aspectRatio, setAspectRatio] = useState(7 / 1);
   const [initialAspectRatio, setInitialAspectRatio] = useState(7 / 1); // Store the initial aspect ratio
+  const [selectedRatio, setSelectedRatio] = useState(null);
 
+  const handleRadioChange = (event) => {
+    setSelectedRatio(event.target.value);
+    onAspectRatioChange(event);
+  };
   const getImageAspectRatio = (imageUrl) => {
     return new Promise((resolve, reject) => {
       const img = new Image();
@@ -40,6 +47,7 @@ const ImageCropper = ({ image, onCropDone, onCropCancel }) => {
 
   const onAspectRatioChange = (event) => {
     const value = parseFloat(event.target.value);
+    console.log("value", value);
     if (value === initialAspectRatio) {
       resetCrop();
     } else {
@@ -72,41 +80,110 @@ const ImageCropper = ({ image, onCropDone, onCropCancel }) => {
         }}
       />
       <div className="action-btns">
-        <div className="aspect-ratios" onChange={onAspectRatioChange}>
-          <label htmlFor="1">
-            <input type="radio" id="1" value={1 / 1} name="ratio" />
-            1:1
-          </label>
-          <label htmlFor="2">
-            <input type="radio" id="2" value={5 / 4} name="ratio" />
-            5:4
-          </label>
-          <label htmlFor="3" className="custom-curser">
-            <input type="radio" id="3"  className="custom-curser"value={4 / 3} name="ratio" />
-            4:3
-          </label>
-          <label htmlFor="4" className="custom-curser">
-            <input type="radio" className="custom-curser" id="4" value={3 / 2} name="ratio" />
-            3:2
-          </label>
-          <label htmlFor="5" className="custom-curser">
-            <input type="radio" id="5"  className="custom-curser"value={5 / 3} name="ratio" />
-            5:3
-          </label>
-          <label htmlFor="6" className="custom-curser">
-            <input type="radio" id="6"  className="custom-curser"value={16 / 9} name="ratio" />
-            16:9
-          </label>
-          <label htmlFor="7" className="custom-curser">
-            <input type="radio" id="7" value={3 / 1} className="custom-curser" name="ratio" />
-            3:1
-          </label>
+        <div className="aspect-ratios" onChange={handleRadioChange}>
+          {location.pathname === "/crop5to3" && (
+            <label htmlFor="5" className="custom-curser">
+              <input
+                type="radio"
+                id="5"
+                className="custom-curser"
+                value={5 / 3}
+                name="ratio"
+              />
+              5:3
+            </label>
+          )}
+          {location.pathname === "/crop1to1" ||
+            (location.pathname === "/crop_background1to1" && (
+              <label htmlFor="1">
+                <input type="radio" id="1" value={1 / 1} name="ratio" />
+                1:1
+              </label>
+            ))}
+          {location.pathname === "/crop_background3to1" && (
+            <label htmlFor="7" className="custom-curser">
+              <input
+                type="radio"
+                id="7"
+                value={3 / 1}
+                className="custom-curser"
+                name="ratio"
+              />
+              3:1
+            </label>
+          )}
+          {location.pathname !== "/crop5to3" &&
+            location.pathname !== "/crop1to1" &&
+            location.pathname !== "/crop_background1to1" &&
+            location.pathname !== "/crop_background3to1" && (
+              <>
+                <label htmlFor="1">
+                  <input type="radio" id="1" value={1 / 1} name="ratio" />
+                  1:1
+                </label>
+                <label htmlFor="2">
+                  <input type="radio" id="2" value={5 / 4} name="ratio" />
+                  5:4
+                </label>
+                <label htmlFor="3" className="custom-curser">
+                  <input
+                    type="radio"
+                    id="3"
+                    className="custom-curser"
+                    value={4 / 3}
+                    name="ratio"
+                  />
+                  4:3
+                </label>
+                <label htmlFor="4" className="custom-curser">
+                  <input
+                    type="radio"
+                    className="custom-curser"
+                    id="4"
+                    value={3 / 2}
+                    name="ratio"
+                  />
+                  3:2
+                </label>
+                <label htmlFor="5" className="custom-curser">
+                  <input
+                    type="radio"
+                    id="5"
+                    className="custom-curser"
+                    value={5 / 3}
+                    name="ratio"
+                  />
+                  5:3
+                </label>
+                <label htmlFor="6" className="custom-curser">
+                  <input
+                    type="radio"
+                    id="6"
+                    className="custom-curser"
+                    value={16 / 9}
+                    name="ratio"
+                  />
+                  16:9
+                </label>
+                <label htmlFor="7" className="custom-curser">
+                  <input
+                    type="radio"
+                    id="7"
+                    value={3 / 1}
+                    className="custom-curser"
+                    name="ratio"
+                  />
+                  3:1
+                </label>
+              </>
+            )}
           <label htmlFor="8" className="custom-curser">
             <input
               type="radio"
               id="8"
               value={initialAspectRatio}
-              name="ratio" className="custom-curser"
+              name="ratio"
+              className="custom-curser"
             />
             Reset
           </label>
@@ -115,14 +192,16 @@ const ImageCropper = ({ image, onCropDone, onCropCancel }) => {
           <button className="btn-1 btn-outline" onClick={onCropCancel}>
             Cancel
           </button>
-          <button
-            className="btn-1"
-            onClick={() => {
-              onCropDone(croppedArea);
-            }}
-          >
-            Crop & Apply
-          </button>
+          {selectedRatio && (
+            <button
+              className="btn-1"
+              onClick={() => {
+                onCropDone(croppedArea);
+              }}
+            >
+              Crop & Apply
+            </button>
+          )}
         </div>
       </div>
     </div>
